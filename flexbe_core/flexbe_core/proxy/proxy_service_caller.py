@@ -95,7 +95,7 @@ class ProxyServiceCaller(object):
             raise ValueError('Cannot call service client %s: Topic not available.' % topic)
         # call service (forward any exceptions)
 
-        if not isinstance(request, ProxyServiceCaller._services[topic].srv_type):
+        if not isinstance(request, ProxyServiceCaller._services[topic].srv_type.Request):
             if request.__class__.__name__ == ProxyServiceCaller._services[topic].srv_type.__name__:
                 # This is the case if the same class is imported multiple times
                 # To avoid rclpy TypeErrors, we will Automatically convert the to base type
@@ -131,7 +131,7 @@ class ProxyServiceCaller(object):
         if not self._check_service_available(topic):
             raise ValueError('Cannot call service client %s: Topic not available.' % topic)
         # call service (forward any exceptions)
-        if not isinstance(request, ProxyServiceCaller._services[topic].srv_type):
+        if not isinstance(request, ProxyServiceCaller._services[topic].srv_type.Request):
             if request.__class__.__name__ == ProxyServiceCaller._services[topic].srv_type.__name__:
                 # This is the case if the same class is imported multiple times
                 # To avoid rclpy TypeErrors, we will automatically convert to the base type
